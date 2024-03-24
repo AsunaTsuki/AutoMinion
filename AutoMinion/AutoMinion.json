@@ -1,12 +1,11 @@
 {
-  "Author": "your name here",
-  "Name": "Sample Plugin",
-  "Punchline": "A short one-liner that shows up in /xlplugins.",
-  "Description": "A description that shows up in /xlplugins. List any major slash-command(s).",
-  "ApplicableVersion": "any",
-  "Tags": [
-    "sample",
-    "plugin",
-    "goats"
-  ]
+    "Author": "Asuna Tsuki",
+    "Name": "AutoMinion",
+    "Punchline": "Automatically dismiss your minion when entering a house and summon it back when you leave",
+    "Description": "Automatically dismiss your minion when entering a house and summon it back when you leave",
+    "ApplicableVersion": "any",
+    "Tags": [
+        "minion",
+        "venues"
+    ]
 }
