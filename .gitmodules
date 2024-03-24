@@ -1,0 +1,6 @@
+[submodule "AutoMinion/ECommons"]
+	path = AutoMinion/ECommons
+	url = https://github.com/NightmareXIV/ECommons.git
+[submodule "ECommons"]
+	path = ECommons
+	url = https://github.com/NightmareXIV/ECommons.git
