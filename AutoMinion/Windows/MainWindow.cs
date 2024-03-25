@@ -6,7 +6,7 @@ using ECommons.Automation;
 using ECommons.DalamudServices;
 using ImGuiNET;
 
-namespace SamplePlugin.Windows;
+namespace AutoMinion.Windows;
 
 public class MainWindow : Window, IDisposable
 {

@@ -3,7 +3,7 @@ using Dalamud.Plugin;
 using System;
 using System.Collections.Generic;
 
-namespace SamplePlugin
+namespace AutoMinion
 {
     [Serializable]
     public class Configuration : IPluginConfiguration
@@ -12,9 +12,9 @@ namespace SamplePlugin
 
         public Dictionary<string, string> SavedMinions = new Dictionary<string, string>();
         public Dictionary<string, string> StaticMinions { get; set; } = new Dictionary<string, string>();
+        public Dictionary<string, bool> StaticMode { get; set; } = new Dictionary<string, bool>();
         public ushort PreviousTerritoryID { get; set; } = 0;
         public ushort CurrentTerritoryID { get; set; } = 0;
-        public bool EnableStaticMinion { get; set; } = false;
 
 
         //public bool SomePropertyToBeSavedAndWithADefault { get; set; } = true;

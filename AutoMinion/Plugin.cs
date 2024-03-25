@@ -4,7 +4,7 @@ using Dalamud.Plugin;
 using System.IO;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin.Services;
-using SamplePlugin.Windows;
+using AutoMinion.Windows;
 using ECommons;
 using ECommons.DalamudServices;
 using ECommons.EzEventManager;
@@ -18,7 +18,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
-namespace SamplePlugin
+namespace AutoMinion
 {
     public sealed class Plugin : IDalamudPlugin
     {
@@ -90,7 +90,7 @@ namespace SamplePlugin
             this.Configuration.Save();
 
             var targetableStartTime = DateTime.Now;
-            bool IsStaticMode = this.Configuration.EnableStaticMinion;
+
 
             // Loop until the player is targetable or until canceled, with async waiting
             while ((DateTime.Now - targetableStartTime).TotalSeconds <= 60) // Inner loop timeout (e.g., 60 seconds)
@@ -105,6 +105,9 @@ namespace SamplePlugin
                         string playerName = Svc.ClientState?.LocalPlayer.Name.ToString();
                         string playerWorld = Svc.ClientState?.LocalPlayer.HomeWorld.GameData.Name.ToString();
                         string playerNameWorld = $"{playerName}@{playerWorld}";
+
+                        this.Configuration.StaticMode.TryGetValue(playerNameWorld, out bool IsStaticMode);
+
 
                         PluginLog.Information($"Player Name: {playerNameWorld}");
                         PluginLog.Information($"TerritoryTypeId: {territoryTypeId}");
@@ -258,7 +261,11 @@ namespace SamplePlugin
 
         public string RetrieveMinion(string charNameWorld)
         {
-            bool IsStaticEnabled = this.Configuration.EnableStaticMinion;
+            string playerName = Svc.ClientState?.LocalPlayer.Name.ToString();
+            string playerWorld = Svc.ClientState?.LocalPlayer.HomeWorld.GameData.Name.ToString();
+            string playerNameWorld = $"{playerName}@{playerWorld}";
+            this.Configuration.StaticMode.TryGetValue(playerNameWorld, out bool IsStaticEnabled);
+
 
             if (!IsStaticEnabled)
             {
