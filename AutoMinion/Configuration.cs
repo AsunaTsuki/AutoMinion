@@ -11,6 +11,11 @@ namespace SamplePlugin
         public int Version { get; set; } = 0;
 
         public Dictionary<string, string> SavedMinions = new Dictionary<string, string>();
+        public Dictionary<string, string> StaticMinions { get; set; } = new Dictionary<string, string>();
+        public ushort PreviousTerritoryID { get; set; } = 0;
+        public ushort CurrentTerritoryID { get; set; } = 0;
+        public bool EnableStaticMinion { get; set; } = false;
+
 
         //public bool SomePropertyToBeSavedAndWithADefault { get; set; } = true;
 
