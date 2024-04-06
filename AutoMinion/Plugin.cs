@@ -17,6 +17,8 @@ using Dalamud.Game.ClientState.Objects.Enums;
 using System.Threading;
 using System.Threading.Tasks;
 using FFXIVClientStructs.FFXIV.Component.GUI;
+using Dalamud.Game.ClientState.Conditions;
+using FFXIVClientStructs.FFXIV.Client.Game;
 
 namespace AutoMinion
 {
@@ -83,6 +85,16 @@ namespace AutoMinion
             return false;
         }
 
+        private bool CanSummonMinion()
+        {
+            unsafe
+            {
+                var result = ActionManager.Instance()->GetActionStatus(ActionType.GeneralAction, 10);
+                var canSummonMinion = result == 0;
+                return canSummonMinion;
+            }
+        }
+
         private async void OnTerritoryChanged(ushort territoryTypeId)
         {
             this.Configuration.PreviousTerritoryID = this.Configuration.CurrentTerritoryID;
@@ -100,7 +112,7 @@ namespace AutoMinion
                     if (!CheckScreenFading())
                     {
 
-                        PluginLog.Verbose("Player is now targetable, summoning minion");
+                        
 
                         string playerName = Svc.ClientState?.LocalPlayer.Name.ToString();
                         string playerWorld = Svc.ClientState?.LocalPlayer.HomeWorld.GameData.Name.ToString();
@@ -117,6 +129,13 @@ namespace AutoMinion
                             // Going into private chambers or workshop
                             return;
                         }
+
+                        if(!CanSummonMinion())
+                        {
+                            // In an area that minions can't be summoned
+                            return;
+                        }
+
 
                         if (IsInHouse(territoryTypeId))
                         {
@@ -147,6 +166,7 @@ namespace AutoMinion
                             var currentMinion = GetCompanion();
                             if (!currentMinion)
                             {
+                                PluginLog.Verbose("Player is now targetable, summoning minion");
                                 // Attempt to retrieve and summon the saved minion asynchronously
                                 await AttemptSummonMinionAsync(playerNameWorld);
                             }
