@@ -27,7 +27,7 @@ namespace AutoMinion
         public string Name => "AutoMinion";
         private const string CommandName = "/autominion";
 
-        private DalamudPluginInterface PluginInterface { get; init; }
+        private IDalamudPluginInterface PluginInterface { get; init; }
         private ICommandManager CommandManager { get; init; }
         public Configuration Configuration { get; init; }
         public WindowSystem WindowSystem = new("AutoMinion");
@@ -36,8 +36,8 @@ namespace AutoMinion
         private MainWindow MainWindow { get; init; }
 
         public Plugin(
-            [RequiredVersion("1.0")] DalamudPluginInterface pluginInterface,
-            [RequiredVersion("1.0")] ICommandManager commandManager)
+            IDalamudPluginInterface pluginInterface,
+            ICommandManager commandManager)
         {
             this.PluginInterface = pluginInterface;
             this.CommandManager = commandManager;
@@ -149,7 +149,7 @@ namespace AutoMinion
                             }
 
                             var currentMinion = GetCompanion();
-                            if (currentMinion)
+                            if (currentMinion != null)
                             {
                                 PluginLog.Verbose("Minion exists, saving and dismissing");
 
@@ -164,7 +164,7 @@ namespace AutoMinion
 
 
                             var currentMinion = GetCompanion();
-                            if (!currentMinion)
+                            if (currentMinion != null)
                             {
                                 PluginLog.Verbose("Player is now targetable, summoning minion");
                                 // Attempt to retrieve and summon the saved minion asynchronously
@@ -312,7 +312,7 @@ namespace AutoMinion
         }
 
 
-        public static GameObject? GetCompanion()
+        public static IGameObject? GetCompanion()
         {
             var companion = Svc.Objects[1];
             if (companion != null && companion.ObjectKind == ObjectKind.Companion) return companion;

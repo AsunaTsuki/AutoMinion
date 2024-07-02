@@ -4,6 +4,7 @@
     "Punchline": "Automatically dismiss your minion when entering a house and summon it back when you leave",
     "Description": "Automatically dismiss your minion when entering a house and summon it back when you leave",
     "ApplicableVersion": "any",
+    "DalamudApiVersion":  10,
     "Tags": [
         "minion",
         "venues"
