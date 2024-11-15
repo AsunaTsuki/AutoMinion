@@ -42,8 +42,8 @@ public class ConfigWindow : Window, IDisposable
 
     public override void Draw()
     {
-        string playerName = Svc.ClientState?.LocalPlayer.Name.ToString();
-        string playerWorld = Svc.ClientState?.LocalPlayer.HomeWorld.Value.Name.ToString();
+        string playerName = Svc.ClientState.LocalPlayer?.Name.ToString();
+        string playerWorld = Svc.ClientState.LocalPlayer?.HomeWorld.Value.Name.ToString();
         string playerNameWorld = $"{playerName}@{playerWorld}";
         var currentCharacterKey = playerNameWorld;
 

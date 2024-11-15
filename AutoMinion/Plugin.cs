@@ -164,7 +164,7 @@ namespace AutoMinion
 
 
                             var currentMinion = GetCompanion();
-                            if (currentMinion != null)
+                            if (currentMinion == null)
                             {
                                 PluginLog.Verbose("Player is now targetable, summoning minion");
                                 // Attempt to retrieve and summon the saved minion asynchronously
