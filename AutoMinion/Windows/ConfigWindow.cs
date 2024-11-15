@@ -7,7 +7,7 @@ using ECommons;
 using ECommons.DalamudServices;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using ImGuiNET;
-using Lumina.Excel.GeneratedSheets2;
+using Lumina.Excel.Sheets;
 
 namespace AutoMinion.Windows;
 
@@ -37,17 +37,19 @@ public class ConfigWindow : Window, IDisposable
         return unlockedCompanions;
     }
 
+
     string filterString = "";
 
     public override void Draw()
     {
         string playerName = Svc.ClientState?.LocalPlayer.Name.ToString();
-        string playerWorld = Svc.ClientState?.LocalPlayer.HomeWorld.GameData.Name.ToString();
+        string playerWorld = Svc.ClientState?.LocalPlayer.HomeWorld.Value.Name.ToString();
         string playerNameWorld = $"{playerName}@{playerWorld}";
         var currentCharacterKey = playerNameWorld;
 
         // Your existing code to fetch and sort the companions
         var unlockedCompanions = GetUnlockedMinions().OrderBy(x => x.Singular.ToString()).ToArray();
+        
 
         // Apply ToTitleCase to each identifier
         var textInfo = CultureInfo.CurrentCulture.TextInfo;

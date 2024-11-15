@@ -115,7 +115,7 @@ namespace AutoMinion
                         
 
                         string playerName = Svc.ClientState?.LocalPlayer.Name.ToString();
-                        string playerWorld = Svc.ClientState?.LocalPlayer.HomeWorld.GameData.Name.ToString();
+                        string playerWorld = Svc.ClientState?.LocalPlayer.HomeWorld.Value.Name.ToString();
                         string playerNameWorld = $"{playerName}@{playerWorld}";
 
                         this.Configuration.StaticMode.TryGetValue(playerNameWorld, out bool IsStaticMode);
@@ -271,7 +271,7 @@ namespace AutoMinion
             PluginLog.Verbose($"Current Minion Name: {currentMinionName}");
 
             string playerName = Svc.ClientState?.LocalPlayer.Name.ToString();
-            string playerWorld = Svc.ClientState?.LocalPlayer.HomeWorld.GameData.Name.ToString();
+            string playerWorld = Svc.ClientState?.LocalPlayer.HomeWorld.Value.Name.ToString();
             string playerNameWorld = $"{playerName}@{playerWorld}";
 
 
@@ -282,7 +282,7 @@ namespace AutoMinion
         public string RetrieveMinion(string charNameWorld)
         {
             string playerName = Svc.ClientState?.LocalPlayer.Name.ToString();
-            string playerWorld = Svc.ClientState?.LocalPlayer.HomeWorld.GameData.Name.ToString();
+            string playerWorld = Svc.ClientState?.LocalPlayer.HomeWorld.Value.Name.ToString();
             string playerNameWorld = $"{playerName}@{playerWorld}";
             this.Configuration.StaticMode.TryGetValue(playerNameWorld, out bool IsStaticEnabled);
 
